@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
+/// To run check the corresponding test class
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -16,8 +17,8 @@ public class Demo1 {
 	private final StatusCodesClient statusCodesClient;
 
 	boolean throwOnSub() {
+		log.info("throwOnSub - start");
 		try {
-			log.info("throwOnSub - start");
 			statusCodesClient.get(HttpStatus.NOT_FOUND)
 					.subscribe(res -> log.info("This will not be printed, {}", res), err -> {
 						log.info("Inner error, as expected", err);
