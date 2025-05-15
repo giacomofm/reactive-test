@@ -1,6 +1,5 @@
 package juk.playground.reactive.webtest.httpbin;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -9,10 +8,11 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
-public class HttpMethodsClient {
+public class HttpMethodsClient extends HttpbinClient {
 
-	private final WebClient httpbinWebClient;
+	public HttpMethodsClient(WebClient httpbinWebClient) {
+		super(httpbinWebClient);
+	}
 
 	public Mono<ResponseEntity<String>> get() {
 		long start = System.currentTimeMillis();
@@ -20,7 +20,7 @@ public class HttpMethodsClient {
 				.uri("/get")
 				.retrieve()
 				.toEntity(String.class)
-				.doOnNext(resp -> log.info("httpbin.org - get {}ms\n{}", System.currentTimeMillis() - start, resp));
+				.doOnNext(res -> logInfo("get", start, res));
 	}
 
 	public Mono<ResponseEntity<String>> post() {
@@ -29,7 +29,7 @@ public class HttpMethodsClient {
 				.uri("/post")
 				.retrieve()
 				.toEntity(String.class)
-				.doOnNext(resp -> log.info("httpbin.org - post {}ms\n{}", System.currentTimeMillis() - start, resp));
+				.doOnNext(res -> logInfo("post", start, res));
 	}
 
 	public Mono<ResponseEntity<String>> put() {
@@ -38,7 +38,7 @@ public class HttpMethodsClient {
 				.uri("/put")
 				.retrieve()
 				.toEntity(String.class)
-				.doOnNext(resp -> log.info("httpbin.org - put {}ms\n{}", System.currentTimeMillis() - start, resp));
+				.doOnNext(res -> logInfo("put", start, res));
 	}
 
 	public Mono<ResponseEntity<String>> patch() {
@@ -47,7 +47,7 @@ public class HttpMethodsClient {
 				.uri("/patch")
 				.retrieve()
 				.toEntity(String.class)
-				.doOnNext(resp -> log.info("httpbin.org - patch {}ms\n{}", System.currentTimeMillis() - start, resp));
+				.doOnNext(res -> logInfo("patch", start, res));
 	}
 
 	public Mono<ResponseEntity<String>> delete() {
@@ -56,7 +56,7 @@ public class HttpMethodsClient {
 				.uri("/delete")
 				.retrieve()
 				.toEntity(String.class)
-				.doOnNext(resp -> log.info("httpbin.org - delete {}ms\n{}", System.currentTimeMillis() - start, resp));
+				.doOnNext(res -> logInfo("delete", start, res));
 	}
 
 }
