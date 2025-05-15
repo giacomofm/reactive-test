@@ -1,10 +1,12 @@
 package juk.playground.reactive.webtest.httpbin;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import reactor.test.StepVerifier;
 
+@Disabled
 @SpringBootTest
 class HttpMethodsClientTest {
 

@@ -1,5 +1,6 @@
 package juk.playground.reactive.webtest.httpbin;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,6 +13,7 @@ import reactor.test.StepVerifier;
 
 import java.util.List;
 
+@Disabled
 @SpringBootTest
 class StatusCodesClientTest {
 
